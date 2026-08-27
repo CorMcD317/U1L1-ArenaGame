@@ -66,18 +66,15 @@ public class App {
         in.nextLine();   // consume the leftover newline. Delete this line and
                          // the "Press Enter" prompt below flies straight past.
 
-        // TODO 1: a switch EXPRESSION that turns difficulty 1/2/3 into
-        //          "Easy" / "Normal" / "Brutal", then print it.
-        //          Note the semicolon after the closing brace — the whole
-        //          switch is the right-hand side of an assignment, so it is
-        //          ONE statement and ends like one.
-        //
-        //              String difficultyName = switch (difficulty) {
-        //                  case 1 -> "Easy";
-        //                  ...
-        //              };
-        //
-        //          Try deleting the default afterwards. It won't compile.
+
+        String difficultyName = switch (difficulty) {
+            case 1 -> "Easy";
+            case 2 -> "Normal";
+            case 3 -> "Brutal";
+            case 4 -> "Grimm";
+            default -> "Grimm";
+            };
+
 
             int health = MAX_HEALTH;
             int gold = STARTING_GOLD;
@@ -208,6 +205,9 @@ public class App {
             //
             //          A ternary chooses a VALUE. If you're choosing an ACTION,
             //          that's an if.
+
+            String conditionWord = health > MAX_HEALTH / 2 ? "steady" : "faltering";
+            
 
             enemyHealth -= damage2;
             System.out.printf("%s has %d HP left.%n", enemyName, enemyHealth);
