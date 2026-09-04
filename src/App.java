@@ -25,6 +25,15 @@ public class App {
     static final int MAX_HEALTH = 100;
     static final int STARTING_GOLD = 20;
 
+    // TODO 0: the arena is 5 rows by 11 columns. Name those.
+    //
+    //          Constants, not magic numbers — the nested loops below should
+    //          read as "for every row, for every column", not "for 0 to 5".
+    //
+    //              static final int ROWS = 5;
+    //              static final int COLS = 11;
+
+
     public static void main(String[] args) {
         /*
          * PSEUDOCODE — the design, before the code (D1.7)
@@ -86,6 +95,19 @@ public class App {
             int enemyHealth = 30 + difficulty * 15;
             int enemyPower = 4 + difficulty * 3;
 
+            // TODO 1: where is everybody?
+                //
+                //          Four ints. Rows and columns are just numbers; the grid gets
+                //          DRAWN from them, nothing is stored yet.
+                //
+                //              int playerRow = 2, playerCol = 1;
+                //              int enemyRow  = 2, enemyCol  = 9;
+                //
+                //          Row 2 is the middle of five rows (0, 1, 2, 3, 4). Column 1
+                //          is just inside the left wall. Work out why column 9 is just
+                //          inside the right wall of an 11-wide arena.
+
+
             System.out.printf("%-12s HP %3d/%3d  Gold %4d  Lv %d%n",
                               playerName, health, MAX_HEALTH, gold, level);
             System.out.printf("Alive %-5b  Crit %.0f%%%n", alive, critChance * 100);
@@ -97,6 +119,19 @@ public class App {
             in.nextLine();
             System.out.println("");
 
+             // TODO 4: count down from 3, then print FIGHT!
+        //
+        //          Do this one first — it is four lines and it proves you have
+        //          the three parts of a for loop the right way round.
+        //
+        //              for (int i = 3; i > 0; i--) {
+        //                  System.out.println(i + "...");
+        //              }
+        //
+        //          START at 3. TEST that it is still above 0. STEP DOWNWARD.
+        //          Get any one of the three pointing the wrong way and the loop
+        //          either never runs or never stops. Try it wrong once.
+
             System.out.println(enemyName.toUpperCase() + " blocks your path!");
             System.out.printf("Opponent %-14s HP %3d  Power %2d%n",
                               enemyName, enemyHealth, enemyPower);
@@ -105,7 +140,7 @@ public class App {
             boolean isBoss = enemyName.contains("King Tai Jitu");
             System.out.println("Boss fight: " + isBoss);
 
-            if (enemyName.equalsIgnoreCase("cave goblin")) {
+            if (enemyName.equalsIgnoreCase("BeoWolf")) {
                 System.out.println("You have fought one of these before.");
             }
             System.out.println("");
@@ -197,17 +232,9 @@ public class App {
             potions = 1;
 
 
-            // TODO 4: two ternaries.
-            //          (a) singular/plural, so one potion doesn't read "1 potions":
-            //                  potions == 1 ? "potion" : "potions"
-            //          (b) a condition word — over half health is "steady",
-            //              otherwise "faltering"
-            //
-            //          A ternary chooses a VALUE. If you're choosing an ACTION,
-            //          that's an if.
+            String condition = health > MAX_HEALTH / 2 ? "steady" : "faltering";
+            String potions = potion == 1 ? "potion" : "potions";
 
-            String conditionWord = health > MAX_HEALTH / 2 ? "steady" : "faltering";
-            
 
             enemyHealth -= damage2;
             System.out.printf("%s has %d HP left.%n", enemyName, enemyHealth);
